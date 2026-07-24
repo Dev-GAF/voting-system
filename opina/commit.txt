@@ -1,9 +1,0 @@
-feat(auth): implementar autenticação social
-
-- configura Auth.js.
-- adiciona login com Google.
-- adiciona login com Facebook.
-- cria componentes de login social.
-- implementa rota de autenticação da aplicação.
-- adiciona dashboard para validação da sessão do usuário.
-- configura providers e variáveis de ambiente.
