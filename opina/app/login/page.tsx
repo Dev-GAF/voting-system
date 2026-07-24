@@ -1,7 +1,7 @@
-import FacebookLoginButton from "@/components/FacebookLoginButton.tsx";
-import GoogleLoginButton from "@/components/GoogleLoginButton";
+import SocialLoginButton from "@/components/SocialLoginButton.tsx";
+
 import { Mail, Lock } from "lucide-react";
-import { FaGoogle, FaLinkedinIn, FaFacebookF} from "react-icons/fa";
+import { FaGoogle, FaFacebookF} from "react-icons/fa";
 
 export default function Login() {
 	return (
@@ -58,6 +58,7 @@ export default function Login() {
 								Não tem uma conta? <a href="/register" className="text-blue-500 hover:underline">Cadastre-se</a>
 						</p>
 					</div>
+
 					<div className="flex items-center my-6 w-full max-w-sm">
 						<div className="flex-1 border-t border-gray-300"></div>
 						<span className="px-4 text-sm text-gray-500">ou</span>
@@ -65,9 +66,11 @@ export default function Login() {
 					</div>
 
 					<div className="flex justify-center gap-4">
-						<GoogleLoginButton />
+						<SocialLoginButton provider="google" />
+						<SocialLoginButton provider="facebook" />
+						{/* <GoogleLoginButton />
 
-						<FacebookLoginButton />
+						<FacebookLoginButton /> */}
 					</div>
 				</form>
 			</div>
