@@ -1,3 +1,5 @@
+import FacebookLoginButton from "@/components/FacebookLoginButton.tsx";
+import GoogleLoginButton from "@/components/GoogleLoginButton";
 import { Mail, Lock } from "lucide-react";
 import { FaGoogle, FaLinkedinIn, FaFacebookF} from "react-icons/fa";
 
@@ -8,9 +10,9 @@ export default function Login() {
 				<div className="flex flex-col items-center">
 					<div className="w-28 h-28 rounded-full border-4 border-blue-500 overflow-hidden">
 							<img
-									src="/opina.png"
-									alt="Logo"
-									className="w-full h-full object-cover"
+								src="/opina.png"
+								alt="Logo"
+								className="w-full h-full object-cover"
 							/>
 					</div>
 					<p className="mt-5 text-lg">Crie enquetes em segundos e veja as opiniões em tempo real.</p>
@@ -63,26 +65,9 @@ export default function Login() {
 					</div>
 
 					<div className="flex justify-center gap-4">
-						<button
-							type="button"
-							className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-						>
-							<FaGoogle className="text-red-500 text-xl" size={20}/>
-						</button>
+						<GoogleLoginButton />
 
-						<button
-							type="button"
-							className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-						>
-							<FaLinkedinIn className="text-blue-700 text-xl" size={20}/>
-						</button>
-
-						<button
-							type="button"
-							className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition"
-						>
-							<FaFacebookF className="text-blue-600 text-xl" size={20}/>
-						</button>
+						<FacebookLoginButton />
 					</div>
 				</form>
 			</div>
