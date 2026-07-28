@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -7,9 +9,13 @@ export default function Home() {
             <img src="/opina.png" alt="Logo da opina.com" className="h-10 w-10 mr-2 rounded-full" />
             <span className="font-bold text-lg">Opina</span>
           </div>
-          <div>
-            <a href="/login" className="mr-4 hover:underline">Login</a>
-            <a href="/register" className="hover:underline">Register</a>
+          <div className="flex items-center">
+            <Link href="/login" className="mr-4 hover:underline">
+              Login
+            </Link>
+            <Link href="/register" className="hover:underline">
+              Register
+            </Link>
           </div>
         </nav>
       </header>

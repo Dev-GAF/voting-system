@@ -1,7 +1,5 @@
 import SocialLoginButton from "@/components/SocialLoginButton.tsx";
-
 import { Mail, Lock } from "lucide-react";
-import { FaGoogle, FaFacebookF} from "react-icons/fa";
 
 export default function Login() {
 	return (
@@ -68,9 +66,6 @@ export default function Login() {
 					<div className="flex justify-center gap-4">
 						<SocialLoginButton provider="google" />
 						<SocialLoginButton provider="facebook" />
-						{/* <GoogleLoginButton />
-
-						<FacebookLoginButton /> */}
 					</div>
 				</form>
 			</div>

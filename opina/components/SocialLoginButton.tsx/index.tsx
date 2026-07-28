@@ -19,7 +19,7 @@ export default function SocialLoginButton({ provider }: SocialLoginButtonProps) 
   return (
     <button
       type="button"
-      onClick={() => signIn(provider)}
+      onClick={() => signIn(provider, { callbackUrl: "/dashboard" })}
       className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition cursor-pointer"
     >
       {providers[provider].icon}
