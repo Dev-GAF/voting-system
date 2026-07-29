@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: opina-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: opina
+      POSTGRES_PASSWORD: opina_dev
+      POSTGRES_DB: opina
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
