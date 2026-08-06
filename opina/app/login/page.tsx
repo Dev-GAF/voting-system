@@ -1,4 +1,5 @@
 import SocialLoginButton from "@/components/SocialLoginButton.tsx";
+import { login } from "./actions";
 import { Mail, Lock } from "lucide-react";
 
 export default function Login() {
@@ -17,7 +18,7 @@ export default function Login() {
 				</div>
 			</div>
 			<div className="flex flex-col justify-center items-center bg-gray-100 p-8">
-				<form className="flex flex-col justify-center items-center h-full p-8 bg-white w-100 rounded-2xl shadow-md" >
+				<form action={login} className="flex flex-col justify-center items-center h-full p-8 bg-white w-100 rounded-2xl shadow-md" >
 					<h1 className="text-3xl font-extrabold tracking-tight text-blue-500 mb-2">Bem-vindo de volta!</h1>
 					<div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
 						<div className="relative">
@@ -27,6 +28,7 @@ export default function Login() {
 							/>
 							<input
 								type="email"
+								name="email"
 								placeholder="E-mail"
 								className="w-full pl-10 pr-4 py-1.5 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
 							/>
@@ -39,6 +41,7 @@ export default function Login() {
 							/>
 							<input
 								type="password"
+								name="password"
 								placeholder="Password"
 								className="w-full pl-10 pr-4 py-1.5 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
 							/>

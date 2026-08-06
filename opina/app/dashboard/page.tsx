@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { redirect } from "next/dist/client/components/navigation";
+import { redirect } from "next/navigation";
 import { logout } from "../actions/auth";
 
 export default async function Dashboard() {
