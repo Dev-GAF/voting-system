@@ -46,7 +46,4 @@ export async function register(formData: FormData) {
     }
 
     const passwordHash = await argon2.hash(password);
-    console.log("Password hash:", passwordHash);
-
-    console.log("Dados válidos!");
 }

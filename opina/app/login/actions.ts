@@ -14,8 +14,4 @@ export async function login(formData: FormData) {
         password,
         redirectTo: "/dashboard",
     });
-
-    console.log("Login attempted with email:", email);
-    console.log("Login attempted with password:", password);
-    console.log("Redirecting to /dashboard after login attempt.");
 }

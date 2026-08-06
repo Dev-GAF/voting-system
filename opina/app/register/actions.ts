@@ -70,7 +70,5 @@ export async function registerUser(formData: FormData) {
         },
     });
 
-    console.log("Usuário criado:", user.id);
-
     return;
 }

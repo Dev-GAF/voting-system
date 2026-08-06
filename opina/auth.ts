@@ -41,8 +41,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     },
                 });
 
-                console.log("Usuário encontrado:", user);
-
                 if (user===null) return null;
 
                 if (!user.passwordHash) return null;
@@ -51,7 +49,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 if (!passwordValid) return null;
 
-                return user;
+                return {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    image: user.image,
+                };
             },
         }),
     ],
