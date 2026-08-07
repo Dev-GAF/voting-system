@@ -19,7 +19,7 @@ export default async function Dashboard() {
                     <span className="font-bold text-lg">Opina</span>
                 </div>
                 <div className="flex items-center">
-                    <span className="mr-4">{session?.user?.userName?.slice(0, 10)}</span>
+                    <span className="mr-4">{session?.user?.name?.slice(0, 10)}</span>
                     {session?.user?.image && (
                         <img src={session.user.image} alt="Profile" className="h-10 w-10 rounded-full" />
                     )}
