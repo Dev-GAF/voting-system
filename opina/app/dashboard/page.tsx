@@ -2,6 +2,8 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { logout } from "../actions/auth";
 
+import CreatePollModal from "@/components/CreatePollModal";
+
 export default async function Dashboard() {
     const session = await auth();
 
@@ -17,7 +19,7 @@ export default async function Dashboard() {
                     <span className="font-bold text-lg">Opina</span>
                 </div>
                 <div className="flex items-center">
-                    <span className="mr-4">{session?.user?.name?.slice(0, 10)}</span>
+                    <span className="mr-4">{session?.user?.userName?.slice(0, 10)}</span>
                     {session?.user?.image && (
                         <img src={session.user.image} alt="Profile" className="h-10 w-10 rounded-full" />
                     )}
@@ -32,7 +34,7 @@ export default async function Dashboard() {
 
             <main>
                 <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-                    <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition">Criar enquete</button>
+                    <CreatePollModal />
                 </div>
             </main>
 
