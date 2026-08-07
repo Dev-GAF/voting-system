@@ -53,6 +53,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     id: user.id,
                     email: user.email,
                     name: user.name,
+                    username: user.username,
                     image: user.image,
                 };
             },
@@ -64,7 +65,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
             if (user) {
                 token.id = user.id;
-                token.username = user.username ?? null;
+                token.username = user.username;
             }
 
             return token;
