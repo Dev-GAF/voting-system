@@ -52,3 +52,17 @@ export async function createPoll(formData: FormData) {
 
     return;
 }
+
+export async function getPolls() {
+    const polls = await prisma.poll.findMany({
+        include: {
+            options: true,
+            creator: true,
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+
+    return polls;
+}
