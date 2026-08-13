@@ -4,6 +4,7 @@ import { logout } from "../actions/auth";
 import { getPolls } from "../actions/polls";
 
 import CreatePollModal from "@/components/CreatePollModal";
+import PollCard from "@/components/PollCard";
 
 export default async function Dashboard() {
     const session = await auth();
@@ -46,19 +47,10 @@ export default async function Dashboard() {
 
                     <div className="grid gap-6">
                         {polls.map((poll) => (
-                            <div key={poll.id} className="bg-white p-6 rounded-lg shadow-md">
-                                <h2 className="text-xl font-bold">{poll.title}</h2>
-
-                                {poll.description && (
-                                    <p className="mt-2 text-gray-600">{poll.description}</p>
-                                )}
-
-                                <div className="mt-4 space-y-2">
-                                    {poll.options.map((option) => (
-                                        <div key={option.id} className="border rounded-md p-3">{option.text}</div>
-                                    ))}
-                                </div>
-                            </div>
+                            <PollCard
+                                key={poll.id}
+                                poll={poll}
+                            />
                         ))}
                     </div>
 

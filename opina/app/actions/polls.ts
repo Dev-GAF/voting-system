@@ -66,3 +66,44 @@ export async function getPolls() {
 
     return polls;
 }
+
+export async function vote(pollId: string, optionId: string) {
+    const session = await auth();
+
+    if (!session?.user?.id) 
+        throw new Error("Usuário não autenticado");
+
+    const option = await prisma.option.findUnique({
+        where: {
+            id: optionId,
+        },
+    });
+
+    if (!option) 
+        throw new Error("Opção não encontrada");
+
+    if (option.pollId !== pollId) 
+        throw new Error("Opção inválida para esta enquete");
+
+    const existingVote = await prisma.vote.findUnique({
+        where: {
+            userId_pollId: {
+                userId: session.user.id,
+                pollId,
+            },
+        },
+    });
+
+    if (existingVote) 
+        throw new Error("Você já votou nesta enquete");
+
+    const newVote = await prisma.vote.create({
+        data: {
+            userId: session.user.id,
+            pollId,
+            optionId,
+        },
+    });
+
+    return newVote;
+}
