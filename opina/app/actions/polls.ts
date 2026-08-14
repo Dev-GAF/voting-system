@@ -54,9 +54,22 @@ export async function createPoll(formData: FormData) {
 }
 
 export async function getPolls() {
+    const session = await auth();
+
+    if (!session?.user?.id)
+        throw new Error("Usuário não autenticado");
+
     const polls = await prisma.poll.findMany({
         include: {
-            options: true,
+            options: {
+                include: {
+                    _count: {
+                        select: {
+                            votes: true,
+                        },
+                    },
+                },
+            },
             creator: true,
         },
         orderBy: {
@@ -64,7 +77,23 @@ export async function getPolls() {
         },
     });
 
-    return polls;
+    const userVotes = await prisma.vote.findMany({
+        where: {
+            userId: session.user.id,
+        },
+        select: {
+            pollId: true,
+        },
+    });
+
+    const votedPollIds = new Set(
+        userVotes.map((vote) => vote.pollId)
+    );
+
+    return polls.map((poll) => ({
+        ...poll,
+        hasVoted: votedPollIds.has(poll.id),
+    }));
 }
 
 export async function vote(pollId: string, optionId: string) {
