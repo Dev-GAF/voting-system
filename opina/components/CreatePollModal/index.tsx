@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createPoll } from "@/app/actions/polls";
 
 export default function CreatePollModal() {
     const router = useRouter();
+    const [isPending, startTransition] = useTransition();
 
     const [isOpen, setIsOpen] = useState(false);
     const [options, setOptions] = useState(["", ""]);
@@ -34,21 +35,23 @@ export default function CreatePollModal() {
         setIsOpen(false);
     }
 
-    async function handleSubmit(formData: FormData) 
+    function handleSubmit(formData: FormData) 
     {
-        try 
-        {
-            await createPoll(formData);
+        startTransition(async () => {
+            try 
+            {
+                await createPoll(formData);
 
-            setIsOpen(false);
-            setOptions(["", ""]);
+                setIsOpen(false);
+                setOptions(["", ""]);
 
-            router.refresh();
-        } 
-        catch (error) 
-        {
-            console.error(error);
-        }
+                router.refresh();
+            } 
+            catch (error) 
+            {
+                console.error(error);
+            }
+        });
     }
 
     return (
@@ -172,16 +175,18 @@ export default function CreatePollModal() {
                                     <button
                                         type="button"
                                         onClick={closeModal}
-                                        className="rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-100"
+                                        disabled={isPending}
+                                        className="rounded-lg border border-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
                                     >
                                         Cancelar
                                     </button>
 
                                     <button
                                         type="submit"
-                                        className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                                        disabled={isPending}
+                                        className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50"
                                     >
-                                        Criar enquete
+                                        {isPending ? "Criando..." : "Criar enquete"}
                                     </button>
                                 </div>
                             </form>
