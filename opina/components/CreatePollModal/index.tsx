@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createPoll } from "@/app/actions/polls";
 
 export default function CreatePollModal() {
+    const router = useRouter();
+
     const [isOpen, setIsOpen] = useState(false);
     const [options, setOptions] = useState(["", ""]);
 
@@ -29,6 +32,23 @@ export default function CreatePollModal() {
     function closeModal() 
     {
         setIsOpen(false);
+    }
+
+    async function handleSubmit(formData: FormData) 
+    {
+        try 
+        {
+            await createPoll(formData);
+
+            setIsOpen(false);
+            setOptions(["", ""]);
+
+            router.refresh();
+        } 
+        catch (error) 
+        {
+            console.error(error);
+        }
     }
 
     return (
@@ -60,7 +80,7 @@ export default function CreatePollModal() {
                         </div>
 
                         <div className="min-h-0 flex-1 overflow-y-auto p-6">
-                            <form action={createPoll} className="flex flex-col gap-5">
+                            <form action={handleSubmit} className="flex flex-col gap-5">
                                 <div>
                                     <label
                                         htmlFor="title"
