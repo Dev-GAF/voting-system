@@ -19,15 +19,14 @@ const registerSchema = z
             .string()
             .min(8, "A senha deve ter pelo menos 8 caracteres"),
 
-        confirmPassword: z
-            .string(),
+        confirmPassword: z.string(),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: "As senhas não coincidem",
         path: ["confirmPassword"],
-});
+    });
 
-export async function registerUser(formData: FormData) {
+export async function registerUser(previousState: {success: boolean; message: string;} | null, formData: FormData) {
     const data = {
         username: formData.get("username"),
         email: formData.get("email"),
@@ -39,8 +38,10 @@ export async function registerUser(formData: FormData) {
 
     if (!result.success) 
     {
-        console.log(result.error.issues);
-        return;
+        return {
+            success: false,
+            message: result.error.issues[0].message,
+        };
     }
 
     const { username, email, password } = result.data;
@@ -56,13 +57,26 @@ export async function registerUser(formData: FormData) {
 
     if (existingUser) 
     {
-        console.log("Usuário ou e-mail já cadastrado");
-        return;
+        if (existingUser.email === email) 
+        {
+            return {
+                success: false,
+                message: "Este e-mail já está cadastrado.",
+            };
+        }
+
+        if (existingUser.username === username) 
+        {
+            return {
+                success: false,
+                message: "Este nome de usuário já está cadastrado.",
+            };
+        }
     }
 
     const passwordHash = await argon2.hash(password);
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
         data: {
             username,
             email,
@@ -70,5 +84,8 @@ export async function registerUser(formData: FormData) {
         },
     });
 
-    return;
+    return {
+        success: true,
+        message: "Conta criada com sucesso!",
+    };
 }

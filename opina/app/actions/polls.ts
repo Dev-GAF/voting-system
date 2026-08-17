@@ -48,8 +48,6 @@ export async function createPoll(formData: FormData) {
         },
     });
 
-    console.log("Enquete criada:", poll);
-
     return;
 }
 

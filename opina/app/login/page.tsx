@@ -1,8 +1,14 @@
+"use client";
+
 import SocialLoginButton from "@/components/SocialLoginButton.tsx";
 import { login } from "./actions";
 import { Mail, Lock } from "lucide-react";
 
+import { useActionState } from "react";
+
 export default function Login() {
+	const [state, formAction, isPending] = useActionState(login, null);
+	
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
 			<div className="flex flex-col justify-center items-center bg-blue-100 p-8">
@@ -18,7 +24,7 @@ export default function Login() {
 				</div>
 			</div>
 			<div className="flex flex-col justify-center items-center bg-gray-100 p-8">
-				<form action={login} className="flex flex-col justify-center items-center h-full p-8 bg-white w-100 rounded-2xl shadow-md" >
+				<form action={formAction} className="flex flex-col justify-center items-center h-full p-8 bg-white w-100 rounded-2xl shadow-md" >
 					<h1 className="text-3xl font-extrabold tracking-tight text-blue-500 mb-2">Bem-vindo de volta!</h1>
 					<div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
 						<div className="relative">
@@ -53,6 +59,18 @@ export default function Login() {
 					<div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
 						<button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Entrar</button>
 					</div>
+
+					{state?.message && (
+						<p
+							className={`mt-3 text-sm text-center ${
+								state.success
+									? "text-green-600"
+									: "text-red-600"
+							}`}
+						>
+							{state.message}
+						</p>
+					)}
 					
 					<div className="flex justify-center w-full max-w-sm mt-2">
 						<p className="text-sm text-gray-600 text-center">
