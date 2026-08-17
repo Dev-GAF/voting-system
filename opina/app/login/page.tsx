@@ -53,9 +53,9 @@ export default function Login() {
 							/>
 						</div>
 					</div>
-					<div className="flex justify-end w-full max-w-sm mt-2">
+					{/* <div className="flex justify-end w-full max-w-sm mt-2">
 						<a href="/forgot-password" className="text-sm text-blue-500 hover:underline">Esqueceu a senha?</a>
-					</div>
+					</div> */}
 					<div className="flex flex-col gap-4 mt-4 w-full max-w-sm">
 						<button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Entrar</button>
 					</div>
