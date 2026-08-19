@@ -32,7 +32,11 @@ A aplicação também possui validações no servidor para garantir que um usuá
 
 O projeto está hospedado na Vercel:
 
-**[Acessar o Opina](https://voting-system-czt0liwhc-guilherme-fortes.vercel.app/)**
+<p align="center">
+  <a href="https://voting-system-czt0liwhc-guilherme-fortes.vercel.app/">
+    <img src="https://img.shields.io/badge/🚀%20Acessar%20o%20Opina-2563EB?style=for-the-badge&logoColor=white" alt="Acessar o Opina">
+  </a>
+</p>
 
 ---
 
